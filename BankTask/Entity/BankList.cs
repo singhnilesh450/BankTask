@@ -8,6 +8,7 @@ namespace BankTask.Entity
 {
     class BankList
     {
+        //Hi
         private static List<Bank> _banks = new List<Bank>();
         
 
