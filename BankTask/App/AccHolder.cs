@@ -26,6 +26,8 @@ namespace BankTask.App
                     printTransactHistory();
                     return false;
                 case 5:
+                    AccountList.saveToJson();
+                    AccountList.LoadFromJson();
                     return true;
                 default:
                     return false;
