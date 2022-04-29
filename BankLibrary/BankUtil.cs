@@ -1,49 +1,28 @@
-﻿using System;
+﻿using BankTask.Entity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BankTask.Entity
+namespace BankTask.Services
 {
-    class BankList
+    class BankUtil
     {
-        
-        private static List<Bank> _banks = new List<Bank>();
-        
-
-       static List<Dictionary<string, double>> acceptedCurrency = new List<Dictionary<string, double>>()
-        {
-            { new Dictionary<string, double>{{"INR",1} } },
-            { new Dictionary<string, double>{{"RUB",0.92} } }
-       };
-       static List<Dictionary<string, string>> bankstaff = new List<Dictionary<string, string>>()
-        {
-            { new Dictionary<string, string>{{"abc@123","abc"} } },
-            { new Dictionary<string, string>{{"xyz@234","xyz" } } }
-       };
+        private static List<Bank> _banks = BankList.getBankList();
         public static bool CheckUserPss(string username, string pass)
         {
-           
+            if (username.Length == 0 || pass.Length == 0)
+                return false;
             var user = from bank in _banks
                        from staff in bank.BankStaffs
                        where staff.Keys.Contains(username) && staff[username].Contains(pass)
                        select staff;
-            if (user.Count()==0)
-            {
+            if (user.Count() == 0)
                 return false;
-            }else
-            {
-                
+            else
                 return true;
-            }
         }
-        public static void init()
-        {
-            _banks.Add(new Bank("ICICI", "SBI10102011", 0,5,2,6, acceptedCurrency, bankstaff));
-  
-        }
-
         internal static double getExchangeRate(string bankId, string curr)
         {
             int idx = -1;
@@ -58,7 +37,7 @@ namespace BankTask.Entity
                 }
             }
             double rate = -1;
-            foreach (var item in  bn.AcceptedCurrency)
+            foreach (var item in bn.AcceptedCurrency)
             {
                 if (item.ContainsKey(curr))
                 {
@@ -69,22 +48,16 @@ namespace BankTask.Entity
             return rate;
 
         }
-
-
-
-
         public static void AddBank(Bank bank)
         {
             _banks.Add(bank);
         }
-       
-
         internal static void addCurrencyAndForex(Dictionary<string, double> dictionary)
         {
             _banks.ForEach(cs => cs.AcceptedCurrency.Add(dictionary));
         }
 
-        internal static void updateServiceChargeForSameBank(string bank_id,double rtgs, double imps)
+        internal static void updateServiceChargeForSameBank(string bank_id, double rtgs, double imps)
         {
             int n = -1;
             foreach (var item in _banks)
@@ -105,7 +78,6 @@ namespace BankTask.Entity
             _banks[n].IMPSForSameBank = imps;
             Console.WriteLine(_banks[n].IMPSForSameBank);
         }
-
         internal static void updateServiceChargeForOtherBank(string bank_id, double rtgs, double imps)
         {
             int n = -1;
@@ -127,6 +99,6 @@ namespace BankTask.Entity
             _banks[n].IMPSForOtherBank = imps;
             Console.WriteLine(_banks[n].IMPSForOtherBank);
         }
- 
+
     }
 }
