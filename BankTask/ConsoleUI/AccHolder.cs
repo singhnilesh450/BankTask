@@ -26,6 +26,8 @@ namespace BankTask.App
                     printTransactHistory();
                     return false;
                 case 5:
+                    AccountPersistant.saveToJson();
+                    AccountPersistant.LoadFromJson();
                     return true;
                 default:
                     return false;
@@ -38,7 +40,7 @@ namespace BankTask.App
             string tar_acc_id = Console.ReadLine();
             Console.WriteLine("Enter Amount in INR only");
             double amt = double.Parse(Console.ReadLine());
-            AccountList.Transfer(tar_acc_id, amt, username);
+            Payments.Transfer(tar_acc_id, amt, username);
         }
 
         private static void withdrawMoney(string username)
@@ -46,14 +48,14 @@ namespace BankTask.App
             
             Console.WriteLine("Enter Amount in INR only");
             double amt = double.Parse(Console.ReadLine());
-            AccountList.Withdraw( amt, username);
+            Payments.Withdraw( amt, username);
         }
 
         private static void printTransactHistory()
         {
             Console.WriteLine("Enter Account ID");
             var acc_id = Console.ReadLine();
-            List<String> li = AccountList.getMatchedTransactionHistory(acc_id);
+            List<String> li = AccountUtil.getMatchedTransactionHistory(acc_id);
             if (li.Count() == 0)
             {
                 Console.WriteLine("No such acc_id exist");
@@ -70,7 +72,7 @@ namespace BankTask.App
             string curr = Console.ReadLine();
             Console.WriteLine("Enter Amount");
             double amt = double.Parse(Console.ReadLine());
-            AccountList.deposit(curr, amt, username);
+            Payments.deposit(curr, amt, username);
         }
     }
     }

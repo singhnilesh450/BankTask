@@ -9,9 +9,7 @@ namespace BankTask.Entity
     class Account
     {
         public Account()
-        {
-
-        }
+        {       }
         public Account(string name, string userName, string password, string bankName, string bankId, string accountId, double balance, List<string> transactionHistory)
         {
             Name = name;

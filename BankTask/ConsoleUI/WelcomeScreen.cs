@@ -28,7 +28,9 @@ namespace BankTask.WelcomeScreen
                 {
                     Utility.MainFunc(int.Parse(Console.ReadLine()));
                 }
-                catch { Console.WriteLine("Wronge Choice"); };
+                catch(Exception ex) { Console.WriteLine("Wronge Choice");
+                    Console.WriteLine(ex.ToString());
+                        };
             }
            
         }
