@@ -1,4 +1,5 @@
 ﻿using BankTask.Entity;
+using BankTask.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace BankTask.App
 {
     class BankStaff
     {
+        private static List<Bank> _banks = BankList.getBankList();
         internal static bool BankStaffFunctionalities(int choice)
         {
             switch (choice)
@@ -41,7 +43,7 @@ namespace BankTask.App
                 case 9:
                     return true;
                 case 10:
-                    AccountList.displayAcc();
+                    AccountUtil.displayAcc();
                     return false;
                 default:
                     return false;
@@ -57,7 +59,7 @@ namespace BankTask.App
             double rtgs = double.Parse(Console.ReadLine());
             Console.WriteLine("Enter IMPS rate");
             double imps = double.Parse(Console.ReadLine());
-            BankList.updateServiceChargeForOtherBank(bank_id, rtgs, imps);
+            BankUtil.updateServiceChargeForOtherBank(bank_id, rtgs, imps);
         }
 
         private static void addServiceChargeForSameBank()
@@ -68,7 +70,7 @@ namespace BankTask.App
             double rtgs = double.Parse(Console.ReadLine());
             Console.WriteLine("Enter IMPS rate");
             double imps = double.Parse(Console.ReadLine());
-            BankList.updateServiceChargeForSameBank(bank_id,rtgs, imps);
+            BankUtil.updateServiceChargeForSameBank(bank_id,rtgs, imps);
         }
 
         private static void revertTrans()
@@ -77,7 +79,7 @@ namespace BankTask.App
             string acc_id = Console.ReadLine();
             Console.WriteLine("Enter Transction ID to be reverted");
             string tras_id = Console.ReadLine();
-           bool revert_status = AccountList.transactRevert(acc_id,tras_id);
+           bool revert_status = Payments.transactRevert(acc_id,tras_id);
 
         }
 
@@ -85,7 +87,7 @@ namespace BankTask.App
         {
             Console.WriteLine("Enter Account ID");
             var acc_id = Console.ReadLine();
-            List<String> li = AccountList.getMatchedTransactionHistory(acc_id);
+            List<String> li = AccountUtil.getMatchedTransactionHistory(acc_id);
             if (li.Count()==0)
             {
                 Console.WriteLine("No such acc_id exist");
@@ -103,7 +105,7 @@ namespace BankTask.App
             var curr = Console.ReadLine();
             Console.WriteLine("Enter Exchange rate");
             var rate = double.Parse(Console.ReadLine());
-            BankList.addCurrencyAndForex(new Dictionary<string, double>() {{ curr, rate }});
+            BankUtil.addCurrencyAndForex(new Dictionary<string, double>() {{ curr, rate }});
                 }
 
         private static void deleteAcc()
@@ -118,7 +120,7 @@ namespace BankTask.App
             }
             else
             {
-                AccountList.DeleteAccount(idx);
+                AccountUtil.DeleteAccount(idx);
                 Console.WriteLine("Account Succesfully deleted");
             }
         }
@@ -148,25 +150,39 @@ namespace BankTask.App
                 acc.Balance = bal;
                 acc.BankId = bank_name.Substring(0, 3) + oldDate;
                 acc.AccountId = name.Substring(0, 3) + oldDate;
-                AccountList.UpdateAccount(idx,acc);
+                AccountUtil.UpdateAccount(idx,acc);
                 Console.WriteLine("Account successfully uodated");
             }
         }
-
+        internal static Bank getBankListByBankName(string bankName)
+        {
+            foreach (Bank item in _banks)
+            {
+                if (item.BankName == bankName)
+                    return item;
+            }
+            return null;
+        }
         private static void createNewAcc()
         {
             Console.WriteLine("Enter Your Name");
             string name = Console.ReadLine();
             Console.WriteLine("Enter Bank Name");
             string bank_name = Console.ReadLine();
+
             Console.WriteLine("Give Username");
             string username = Console.ReadLine();
             Console.WriteLine("Give Password");
             string pass = Console.ReadLine();
             Console.WriteLine("Account Balance");
             double bal = double.Parse(Console.ReadLine());
-            
-            AccountList.AddAccount(new Account(name, username, pass, bank_name, bank_name.Substring(0, 3) + DateTime.Now.ToString("ddMMyyyyy"), name.Substring(0, 3) + DateTime.Now.ToString("ddMMyyyy"), bal, new List<string>()));
+            Bank bn = getBankListByBankName(bank_name);
+            if (bn == null)
+            {
+                Console.WriteLine("Bank does not exist TryAgain");
+                return;
+            }
+            AccountUtil.AddAccount(new Account(name, username, pass, bank_name, bn.BankID, name.Substring(0, 3).ToUpper() + DateTime.Now.ToString("ddMMyyyy"), bal, new List<string>()));
         }
     }
 }

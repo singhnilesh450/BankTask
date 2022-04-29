@@ -1,4 +1,5 @@
 ﻿using BankTask.Entity;
+using BankTask.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace BankTask.WelcomeScreen
             string username = Console.ReadLine();
             Console.WriteLine("Enter Password");
             string pass = Console.ReadLine();
-            bool isOk = BankList.CheckUserPss(username, pass);
+            bool isOk = BankUtil.CheckUserPss(username, pass);
             if (isOk)
             {
                 Utility.BankStaffops();
@@ -33,7 +34,7 @@ namespace BankTask.WelcomeScreen
             string username = Console.ReadLine();
             Console.WriteLine("Enter Password");
             string pass = Console.ReadLine();
-            bool isOk = AccountList.CheckUserPss(username, pass);
+            bool isOk = AccountUtil.CheckUserPss(username, pass);
             if (isOk)
             {
                 Utility.AccHolderops(username);
