@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BankTask.Entity
 {
-    class Payments
+ public   class Payments
     {
 
         static List<Account> _accounts = AccountList.getAccountList();
@@ -26,7 +26,7 @@ namespace BankTask.Entity
             _accounts[idx].Balance = _accounts[idx].Balance + amt * excRate;
             _accounts[idx].TransactionHistory.Add("TXN" + ac.BankId + ac.AccountId + DateTime.Now.ToString("ddMMyyyy") + " " + "+" + amt * excRate);
         }
-        internal static void Transfer(string tar_acc_id, double amt, string username)
+        public static void Transfer(string tar_acc_id, double amt, string username)
         {
             Account ac = new Account();
             ac = AccountList.getAccByAccId(tar_acc_id);
@@ -69,7 +69,7 @@ namespace BankTask.Entity
             _accounts[idxd].TransactionHistory.Add("+" + amt);
 
         }
-        internal static bool transactRevert(string acc_id, string tras_id)
+        public static bool transactRevert(string acc_id, string tras_id)
         {
             Account temp = new Account();
             temp=AccountList.getAccByAccId(acc_id);

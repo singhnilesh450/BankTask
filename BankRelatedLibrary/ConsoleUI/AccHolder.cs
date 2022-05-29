@@ -2,12 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BankTask.App
 {
-    class AccHolder
+   public class AccHolder
     {
         internal static bool AccHolderFunctionalities(int v,string username)
         {

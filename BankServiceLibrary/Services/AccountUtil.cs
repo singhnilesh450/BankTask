@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BankTask.Entity
 {
-    class AccountUtil
+  public  class AccountUtil
     {
         static List<Account> _accounts = AccountList.getAccountList();
 
@@ -22,7 +22,7 @@ namespace BankTask.Entity
         {
             _accounts[idx] = ac;
         }
-        internal static bool CheckUserPss(string username, string pass)
+        public static bool CheckUserPss(string username, string pass)
         {
             if (username.Length == 0 || pass.Length == 0)
                 return false;

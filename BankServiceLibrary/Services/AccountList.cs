@@ -1,16 +1,8 @@
-﻿
-using Nancy.Json;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace BankTask.Entity
 {
-    class AccountList
+    public class AccountList
     {
         private static List<Account> _accounts = new List<Account>();
 
@@ -41,7 +33,7 @@ namespace BankTask.Entity
             }
             return n;
         }
-        internal static Account getAccByAccId(string acc_id)
+        public static Account getAccByAccId(string acc_id)
         {
             foreach (Account item in _accounts)
             {
@@ -63,7 +55,7 @@ namespace BankTask.Entity
             }
             return n;
         }
-        internal static Account getAccByUsername(string user)
+        public static Account getAccByUsername(string user)
         {
             foreach (Account item in _accounts)
             {

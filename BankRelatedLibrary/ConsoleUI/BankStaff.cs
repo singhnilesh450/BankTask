@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BankTask.App
 {
-    class BankStaff
+   public class BankStaff
     {
         private static List<Bank> _banks = BankList.getBankList();
         internal static bool BankStaffFunctionalities(int choice)

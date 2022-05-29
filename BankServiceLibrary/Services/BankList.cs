@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BankTask.Entity
 {
-    class BankList
+  public  class BankList
     {
         
         private static List<Bank> _banks = new List<Bank>();

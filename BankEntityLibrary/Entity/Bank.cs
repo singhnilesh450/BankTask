@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BankTask.Entity
 {
-    class Bank
+   public class Bank
     {
         public Bank()
         {

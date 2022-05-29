@@ -15,7 +15,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BankEntityLibrary\BankEntityLibrary.csproj" />
     <ProjectReference Include="..\BankRelatedLibrary\BankRelatedLibrary.csproj" />
+    <ProjectReference Include="..\BankServiceLibrary\BankServiceLibrary.csproj" />
   </ItemGroup>
 
 </Project>

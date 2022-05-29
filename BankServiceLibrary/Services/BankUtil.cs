@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BankTask.Services
 {
-    class BankUtil
+   public class BankUtil
     {
         private static List<Bank> _banks = BankList.getBankList();
         public static bool CheckUserPss(string username, string pass)
@@ -23,7 +23,7 @@ namespace BankTask.Services
             else
                 return true;
         }
-        internal static double getExchangeRate(string bankId, string curr)
+        public static double getExchangeRate(string bankId, string curr)
         {
             int idx = -1;
             Bank bn = new Bank();
@@ -52,12 +52,12 @@ namespace BankTask.Services
         {
             _banks.Add(bank);
         }
-        internal static void addCurrencyAndForex(Dictionary<string, double> dictionary)
+        public static void addCurrencyAndForex(Dictionary<string, double> dictionary)
         {
             _banks.ForEach(cs => cs.AcceptedCurrency.Add(dictionary));
         }
 
-        internal static void updateServiceChargeForSameBank(string bank_id, double rtgs, double imps)
+        public static void updateServiceChargeForSameBank(string bank_id, double rtgs, double imps)
         {
             int n = -1;
             foreach (var item in _banks)
@@ -78,7 +78,7 @@ namespace BankTask.Services
             _banks[n].IMPSForSameBank = imps;
             Console.WriteLine(_banks[n].IMPSForSameBank);
         }
-        internal static void updateServiceChargeForOtherBank(string bank_id, double rtgs, double imps)
+        public static void updateServiceChargeForOtherBank(string bank_id, double rtgs, double imps)
         {
             int n = -1;
             foreach (var item in _banks)

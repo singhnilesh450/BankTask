@@ -1,4 +1,5 @@
-﻿using Nancy.Json;
+﻿using BankRelatedLibrary.Services;
+using Nancy.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BankTask.Entity
 {
-    class AccountPersistant
+ public class AccountPersistant:IData
     {
 
         static List<Account> _accounts = AccountList.getAccountList();
