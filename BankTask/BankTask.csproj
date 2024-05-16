@@ -5,4 +5,19 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="IntactData\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Nancy" Version="2.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BankEntityLibrary\BankEntityLibrary.csproj" />
+    <ProjectReference Include="..\BankRelatedLibrary\BankRelatedLibrary.csproj" />
+    <ProjectReference Include="..\BankServiceLibrary\BankServiceLibrary.csproj" />
+  </ItemGroup>
+
 </Project>

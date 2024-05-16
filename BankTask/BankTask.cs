@@ -7,8 +7,7 @@ namespace BankTask
     {
         static void Main(string[] args)
         {
-            WelcomeScreen.WelcomeScreen.Welcome();
-            
+            WelcomeScreen.WelcomeScreen.Welcome();            
         }
     }
 }
