@@ -33,7 +33,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.banktask.BankTask</mainClass>
+                            <mainClass>com.banktask.application.BankApplication</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
